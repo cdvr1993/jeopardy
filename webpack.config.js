@@ -18,6 +18,7 @@ module.exports = {
   resolve: {
     alias: {
       components: require('path').resolve(__dirname, 'src/components/'),
+      services: require('path').resolve(__dirname, 'src/services/'),
     },
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: [".ts", ".tsx", ".js", ".json"]
