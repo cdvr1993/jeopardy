@@ -1,19 +1,29 @@
 import * as React from 'react';
+import { connect, DispatchProp } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Navbar, NavItem } from "react-materialize";
+import { Game } from 'types';
 
 interface NavLink {
   path: string,
   name: string
 }
 
-export const _TopNavBar = (props: RouteComponentProps<{}>) => {
+interface TopNavBarProps {
+  currentPlayer: number
+}
+
+export const _TopNavBar = (props: TopNavBarProps & RouteComponentProps<{}>) => {
   const links: Array<NavLink> = [
     { path: '/', name: 'Home' }
   ];
 
+  let brand = '';
+
+  if (props.currentPlayer != null) brand = `Team #${props.currentPlayer}`;
+
   return (
-    <Navbar brand='' left>
+    <Navbar brand={brand} left>
       {links.map(link => (
         <NavItem
           key={link.path}
@@ -27,4 +37,8 @@ export const _TopNavBar = (props: RouteComponentProps<{}>) => {
   );
 }
 
-export const TopNavBar = withRouter(_TopNavBar);
+const mapStateToProps = (state: any): TopNavBarProps => {
+  return { currentPlayer: (state.GameReducer as Game).currentPlayer };
+};
+
+export const TopNavBar = connect(mapStateToProps)(withRouter(_TopNavBar));
