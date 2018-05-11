@@ -6,7 +6,7 @@ export interface AppLayoutProps {
   children: React.ReactNode
 }
 
-export const AppLayout = (props: AppLayoutProps, some: any) => (
+export const AppLayout = (props: AppLayoutProps) => (
   <div>
     <TopNavBar />
     <Row>

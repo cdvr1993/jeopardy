@@ -17,7 +17,10 @@ module.exports = {
   devtool: "source-map",
   resolve: {
     alias: {
+      actions: require('path').resolve(__dirname, 'src/actions/'),
       components: require('path').resolve(__dirname, 'src/components/'),
+      reducers: require('path').resolve(__dirname, 'src/reducers/'),
+      types: require('path').resolve(__dirname, 'src/types/'),
     },
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: [".ts", ".tsx", ".js", ".json"]
