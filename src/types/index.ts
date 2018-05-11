@@ -11,7 +11,13 @@ export interface BaseAction { readonly type: string }
 
 export type Dispatcher = (action: BaseAction) => void
 
+export interface ColorConfig {
+  defaultColor: string
+  possibleColors: Array<string>
+}
+
 export interface Game {
+  answered: { [key: string]: { [key: number]: number } }
   categories: Array<string>
   currentPlayer: number
   numberOfPlayers: number

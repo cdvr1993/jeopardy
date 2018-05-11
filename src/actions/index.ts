@@ -10,7 +10,13 @@ export function fetchGameSuccessAction(game: Game): FetchGameSuccessAction {
 const FetchGameMock: JSONResponse<Game> = {
   data: {
     data: <Game>{
-      categories: ['Science', 'Literature', 'History', 'Sports'],
+      answered: {
+        science: {100: 0},
+        literature: {50: 1, 100: 3, 150: 2, 200: 1},
+        history: {},
+        sports: {100: 0, 150: 0, 200: 2}
+      },
+      categories: ['science', 'literature', 'history', 'sports'],
       currentPlayer: 0,
       numberOfPlayers: 4,
       possibleScores: [50, 100, 150, 200],

@@ -2,6 +2,7 @@ import { FetchGameSuccessAction, FETCH_GAME_SUCCESS_ACTION } from 'actions';
 import { BaseAction, Game } from 'types';
 
 const initialGame = <Game>{
+  answered: {},
   categories: [],
   currentPlayer: 0,
   numberOfPlayers: 0,
