@@ -42,11 +42,11 @@ class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<
                 {possibleScores.map(score => (
                   <Row key={score}>
                     <Col s={12}>
-                      <Link to={`/question/${category}/${score}`}>
-                        <Button waves='light' style={{width: "100%"}}>
+                      <Button waves='light' style={{width: "100%"}} disabled={false}>
+                        <Link to={`/question/${category}/${score}`} style={{color: 'white'}}>
                           <h6 className="center-align">{score}</h6>
-                        </Button>
-                      </Link>
+                        </Link>
+                      </Button>
                     </Col>
                   </Row>
                 ))}

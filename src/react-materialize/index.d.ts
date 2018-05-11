@@ -1,10 +1,7 @@
 declare module 'react-materialize' {
   import * as React from 'react';
 
-  interface BaseProps {
-    className?: string
-    style?: Object
-  }
+  interface BaseProps extends React.HTMLAttributes<HTMLElement> { }
 
   interface NavbarProps extends BaseProps {
     brand: string
@@ -28,7 +25,7 @@ declare module 'react-materialize' {
   class Col extends React.Component<ColProps> {}
 
   interface ButtonProps extends BaseProps {
-    onClick?: Function
+    disabled?: boolean
     waves?: string
   }
   class Button extends React.Component<ButtonProps> {}
