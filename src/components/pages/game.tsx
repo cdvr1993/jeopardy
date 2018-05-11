@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Button, Col, ColProps, Row } from 'react-materialize';
 import { connect, DispatchProp } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import { fetchGame } from 'actions';
 import { Game } from 'types';
 
@@ -10,13 +12,9 @@ interface GameDashboardProps {
 
 const COLUMNS = 12;
 
-class _GameDashboard extends React.Component<DispatchProp & GameDashboardProps> {
+class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<{}> & GameDashboardProps> {
   componentDidMount() {
     fetchGame(this.props.dispatch);
-  }
-
-  onCategoryClick(category: string, score: number) {
-    console.log(category, score);
   }
 
   render(): React.ReactNode {
@@ -44,9 +42,11 @@ class _GameDashboard extends React.Component<DispatchProp & GameDashboardProps> 
                 {possibleScores.map(score => (
                   <Row key={score}>
                     <Col s={12}>
-                      <Button waves='light' onClick={this.onCategoryClick.bind(this, category, score)} style={{width: "100%"}}>
-                        <h6 className="center-align">{score}</h6>
-                      </Button>
+                      <Link to={`/question/${category}/${score}`}>
+                        <Button waves='light' style={{width: "100%"}}>
+                          <h6 className="center-align">{score}</h6>
+                        </Button>
+                      </Link>
                     </Col>
                   </Row>
                 ))}
