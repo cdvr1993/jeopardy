@@ -39,7 +39,7 @@ export const GameBoard = (props: GameDashboardProps) => {
           <Col key={category} {...sizeProp}>
             <Row>
               <Col s={12}>
-                <h5 className="center-align">{category}</h5>
+                <h5 className="center-align" style={{ textTransform: 'capitalize' }}>{category}</h5>
               </Col>
             </Row>
             <Row>
