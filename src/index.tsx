@@ -1,10 +1,25 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import { AppLayout } from 'components/layout/app';
 
-interface HelloProps { compiler: string, framework: string }
-const Hello = (props: HelloProps) => <h1>Hello from {props.compiler} and {props.framework}!</h1>;
+const HelloWorld = () => <h1>Hello World!</h1>
+
+const App = () => (
+  <Router>
+    <AppLayout>
+      <Switch>
+        <Route exact path="/" component={HelloWorld} />
+      </Switch>
+    </AppLayout>
+  </Router>
+);
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
-    document.getElementById("body")
+  <App />,
+  document.getElementById("body")
 );
