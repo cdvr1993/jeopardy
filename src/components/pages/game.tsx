@@ -4,6 +4,7 @@ import { connect, DispatchProp } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { fetchGame } from 'actions';
+import { ColorDashboard } from 'components/color-dashboard';
 import { ColorConfig, Game } from 'types';
 
 interface GameDashboardProps {
@@ -32,7 +33,7 @@ class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<
     let board;
 
     if (this.props.game) {
-      const { answered, categories } = this.props.game;
+      const { answered, categories, numberOfPlayers } = this.props.game;
       const possibleScores = this.props.game.possibleScores.slice();
       possibleScores.sort((a: number, b: number) => b - a);
       const colSize = Math.floor(COLUMNS / categories.length);
@@ -41,34 +42,39 @@ class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<
       else Object.assign(sizeProp, {m: colSize * 2, l: colSize});
 
       board = (
-        <Row>
-          {categories.map(category => (
-            <Col key={category} {...sizeProp}>
-              <Row>
-                <Col s={12}>
-                  <h5 className="center-align">{category}</h5>
-                </Col>
-              </Row>
-              <Row>
-                {possibleScores.map(score => (
-                  <Row key={score}>
-                    <Col s={12}>
-                      <Button
-                        waves='light'
-                        style={{width: "100%"}}
-                        disabled={answered[category][score] != null}
-                      >
-                        <Link to={`/question/${category}/${score}`} style={{color: this.getColor(category, score)}}>
-                          <h6 className="center-align" style={{ fontWeight: 'bold' }}>{score}</h6>
-                        </Link>
-                      </Button>
-                    </Col>
-                  </Row>
-                ))}
-              </Row>
-            </Col>
-          ))}
-        </Row>
+        <div>
+          <Row>
+            {categories.map(category => (
+              <Col key={category} {...sizeProp}>
+                <Row>
+                  <Col s={12}>
+                    <h5 className="center-align">{category}</h5>
+                  </Col>
+                </Row>
+                <Row>
+                  {possibleScores.map(score => (
+                    <Row key={score}>
+                      <Col s={12}>
+                        <Button
+                          waves='light'
+                          style={{width: "100%"}}
+                          disabled={answered[category][score] != null}
+                        >
+                          <Link to={`/question/${category}/${score}`} style={{color: this.getColor(category, score)}}>
+                            <h6 className="center-align" style={{ fontWeight: 'bold' }}>{score}</h6>
+                          </Link>
+                        </Button>
+                      </Col>
+                    </Row>
+                  ))}
+                </Row>
+              </Col>
+            ))}
+          </Row>
+          <Row>
+            <ColorDashboard colors={colorConfig.possibleColors.slice(0, numberOfPlayers)} />
+          </Row>
+        </div>
       );
     }
 
