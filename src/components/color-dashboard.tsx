@@ -16,7 +16,7 @@ export const ColorDashboard = (props: ColorDashboardProps) => (
     </Row>
     <Row>
       {props.colors.map((color: string, index: number) => (
-        <Col s={2}>
+        <Col key={color} s={2}>
           <Row style={{ marginBottom: 0 }}>
             <Col s={12}>
               <Button className={color} style={{width: "100%"}} />
