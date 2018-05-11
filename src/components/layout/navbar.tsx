@@ -23,7 +23,7 @@ export const _TopNavBar = (props: TopNavBarProps & RouteComponentProps<{}>) => {
   if (props.currentPlayer != null) brand = `Team #${props.currentPlayer}`;
 
   return (
-    <Navbar brand={brand} left>
+    <Navbar className="green darken-4" brand={brand} left>
       {links.map(link => (
         <NavItem
           key={link.path}
