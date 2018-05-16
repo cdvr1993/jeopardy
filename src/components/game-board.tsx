@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Button, Col, ColProps, Row } from 'react-materialize';
 import { Link } from 'react-router-dom';
 import { ColorDashboard } from 'components/color-dashboard';
-import { ColorConfig, Game } from 'types';
+import { ColorConfig, Game, PlayersInfo } from 'types';
 
 export interface GameDashboardProps {
   game: Game
+  playersInfo: PlayersInfo
 };
 
 const COLUMNS = 12;
@@ -24,7 +25,8 @@ const getColor = (answered: any, category: string, score: number) => (
 export const GameBoard = (props: GameDashboardProps) => {
   if (!props.game) return null;
 
-  const { answered, categories, numberOfPlayers } = props.game;
+  const { answered, categories } = props.game;
+  const { numberOfPlayers } = props.playersInfo;
   const possibleScores = props.game.possibleScores.slice();
   possibleScores.sort((a: number, b: number) => b - a);
   const colSize = Math.floor(COLUMNS / categories.length);

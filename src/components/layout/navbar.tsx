@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Navbar, NavItem } from "react-materialize";
-import { Game } from 'types';
+import { fetchPlayersInfo } from 'actions';
+import { Game, ReducerManager } from 'types';
 
 interface NavLink {
   path: string,
@@ -13,32 +14,38 @@ interface TopNavBarProps {
   currentPlayer: number
 }
 
-export const _TopNavBar = (props: TopNavBarProps & RouteComponentProps<{}>) => {
-  const links: Array<NavLink> = [
-    { path: '/', name: 'Home' }
-  ];
+class _TopNavBar extends React.Component<TopNavBarProps & DispatchProp & RouteComponentProps<{}>> {
+  componentDidMount() {
+    fetchPlayersInfo(this.props.dispatch);
+  }
 
-  let brand = '';
+  render(): React.ReactNode {
+    const links: Array<NavLink> = [
+      { path: '/', name: 'Home' }
+    ];
 
-  if (props.currentPlayer != null) brand = `Team #${props.currentPlayer}`;
+    let brand = '';
 
-  return (
-    <Navbar className="green darken-4" brand={brand} left>
-      {links.map(link => (
-        <NavItem
-          key={link.path}
-          href={`${link.path}`}
-          className={link.path === props.location.pathname ? 'active' : ''}
-        >
-          {link.name}
-        </NavItem>
-      ))}
-    </Navbar>
-  );
+    if (this.props.currentPlayer != null) brand = `Team #${this.props.currentPlayer}`;
+
+    return (
+      <Navbar className="green darken-4" brand={brand} left>
+        {links.map(link => (
+          <NavItem
+            key={link.path}
+            href={`${link.path}`}
+            className={link.path === this.props.location.pathname ? 'active' : ''}
+          >
+            {link.name}
+          </NavItem>
+        ))}
+      </Navbar>
+    );
+  }
 }
 
-const mapStateToProps = (state: any): TopNavBarProps => {
-  return { currentPlayer: (state.GameReducer as Game).currentPlayer };
+const mapStateToProps = (state: ReducerManager): TopNavBarProps => {
+  return { currentPlayer: state.PlayersInfoReducer.currentPlayer };
 };
 
 export const TopNavBar = connect(mapStateToProps)(withRouter(_TopNavBar));

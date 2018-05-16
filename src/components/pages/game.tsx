@@ -6,11 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchGame } from 'actions';
 import { ColorDashboard } from 'components/color-dashboard';
 import { ColorConfig, Game, ReducerManager } from 'types';
-import { GameBoard } from 'components/game-board';
-
-interface GameDashboardProps {
-  game: Game
-}
+import { GameBoard, GameDashboardProps } from 'components/game-board';
 
 const COLUMNS = 12;
 
@@ -33,14 +29,14 @@ class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<
           </Col>
         </Row>
 
-        <GameBoard game={this.props.game} />
+        <GameBoard game={this.props.game} playersInfo={this.props.playersInfo} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: ReducerManager) => {
-  return { game: state.GameReducer };
+const mapStateToProps = (state: ReducerManager): GameDashboardProps => {
+  return { game: state.GameReducer, playersInfo: state.PlayersInfoReducer };
 };
 
 

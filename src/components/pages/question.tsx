@@ -3,10 +3,11 @@ import { Button, Col, Input, Row } from 'react-materialize';
 import { connect, DispatchProp } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { fetchQuestion } from 'actions';
-import { JeopardyQuestion, ReducerManager } from 'types';
+import { JeopardyQuestion, PlayersInfo, ReducerManager } from 'types';
 
 interface QuestionProps {
   question: JeopardyQuestion
+  playersInfo: PlayersInfo
 }
 
 interface QuestionRouteParams {
@@ -30,6 +31,19 @@ class _Question extends React.Component<QuestionProps & DispatchProp & RouteComp
   render(): React.ReactNode {
     const { question } = this.props;
 
+    let optionTeams: React.ReactNode;
+
+    if (this.props.playersInfo) {
+      optionTeams = (
+        <Input type="select" label="Select team">
+          <option value="-1">NA</option>
+          {Array.from({ length: this.props.playersInfo.numberOfPlayers}).map((val: any, key: number) => (
+            <option key={key} value={key}>{key + 1}</option>
+          ))}
+        </Input>
+      );
+    }
+
     return (
       <Row>
         <Col s={12}>
@@ -50,11 +64,7 @@ class _Question extends React.Component<QuestionProps & DispatchProp & RouteComp
 
           <Row style={{marginTop: '10em'}}>
             <Col m={2} l={1} offset="m7 l9" className="input-field">
-              <Input type="select" label="Select team">
-                <option value="-1">NA</option>
-                <option value="0">1</option>
-                <option value="1">2</option>
-              </Input>
+              {optionTeams}
             </Col>
             <Col m={3} l={2}>
               <Col s={12}>
@@ -68,8 +78,8 @@ class _Question extends React.Component<QuestionProps & DispatchProp & RouteComp
   }
 }
 
-const mapStateToProps = (state: ReducerManager) => {
-  return { question: state.QuestionReducer };
+const mapStateToProps = (state: ReducerManager): QuestionProps => {
+  return { question: state.QuestionReducer, playersInfo: state.PlayersInfoReducer };
 };
 
 export const Question = connect(mapStateToProps)(_Question);

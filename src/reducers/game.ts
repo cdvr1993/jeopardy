@@ -4,8 +4,6 @@ import { BaseAction, Game } from 'types';
 const initialGame = <Game>{
   answered: {},
   categories: [],
-  currentPlayer: 0,
-  numberOfPlayers: 0,
   possibleScores: [],
   scores: []
 }

@@ -16,11 +16,14 @@ export interface ColorConfig {
   possibleColors: Array<string>
 }
 
+export interface PlayersInfo {
+  currentPlayer: number
+  numberOfPlayers: number
+}
+
 export interface Game {
   answered: { [key: string]: { [key: number]: number } }
   categories: Array<string>
-  currentPlayer: number
-  numberOfPlayers: number
   possibleScores: Array<number>
   scores: Array<number>
 }
@@ -37,5 +40,6 @@ export interface JeopardyQuestion extends Question {
 
 export interface ReducerManager {
   GameReducer: Game
+  PlayersInfoReducer: PlayersInfo
   QuestionReducer: JeopardyQuestion
 }
