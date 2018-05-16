@@ -24,3 +24,18 @@ export interface Game {
   possibleScores: Array<number>
   scores: Array<number>
 }
+
+export interface Question {
+  statement: string
+  answer: string
+}
+
+export interface JeopardyQuestion extends Question {
+  category: string
+  score: number
+}
+
+export interface ReducerManager {
+  GameReducer: Game
+  QuestionReducer: JeopardyQuestion
+}

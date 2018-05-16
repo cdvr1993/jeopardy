@@ -15,6 +15,6 @@ export default (state: Game = initialGame, action: BaseAction) => {
     case FETCH_GAME_SUCCESS_ACTION:
       return (<FetchGameSuccessAction>action).game;
     default:
-      return initialGame;
+      return state;
   }
 }

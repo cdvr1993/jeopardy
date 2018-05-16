@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { fetchGame } from 'actions';
 import { ColorDashboard } from 'components/color-dashboard';
-import { ColorConfig, Game } from 'types';
+import { ColorConfig, Game, ReducerManager } from 'types';
 import { GameBoard } from 'components/game-board';
 
 interface GameDashboardProps {
@@ -39,7 +39,7 @@ class _GameDashboard extends React.Component<DispatchProp & RouteComponentProps<
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReducerManager) => {
   return { game: state.GameReducer };
 };
 

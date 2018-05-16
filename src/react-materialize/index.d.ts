@@ -21,6 +21,7 @@ declare module 'react-materialize' {
     l?: number
     m?: number
     s?: number
+    offset?: string
   }
   class Col extends React.Component<ColProps> {}
 
@@ -29,4 +30,10 @@ declare module 'react-materialize' {
     waves?: string
   }
   class Button extends React.Component<ButtonProps> {}
+
+  interface InputProps {
+    label?: string
+    type: string
+  }
+  class Input extends React.Component<InputProps> {}
 }

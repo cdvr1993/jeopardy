@@ -10,6 +10,7 @@ import {
 import Reducers from 'reducers';
 import { AppLayout } from 'components/layout/app';
 import { GameDashboard } from 'components/pages/game';
+import { Question } from 'components/pages/question';
 
 const store = createStore(Reducers);
 
@@ -19,6 +20,7 @@ const App = () => (
       <AppLayout>
         <Switch>
           <Route exact path="/" component={GameDashboard} />
+          <Route path="/question/:category/:score" component={Question} />
         </Switch>
       </AppLayout>
     </Router>
